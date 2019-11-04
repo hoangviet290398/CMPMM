@@ -69,8 +69,8 @@
                            <div class="col-md-3">
                               <ul class="usermenu">
                                     <% if (user) { %>
-                                        <li><img src="<%= user.thumbnail %>" class="user-avatar img-rounded align-middle"/></li> 
-                                        <li><a href="#"><%= user.username %></a></li>
+                                        <li><img src="<%= user.google.thumbnail %>" class="user-avatar img-rounded align-middle"/></li> 
+                                        <li><a href="#"><%= user.google.username %></a></li>
                                         
                                         <li><a href="/auth/logout">Log out</a></li>
                                      
