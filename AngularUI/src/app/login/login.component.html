@@ -18,9 +18,13 @@
                     </div>
                     <p class="pt-3">Or login using:</p>
                     <div class="ml-0 mt-2 row">
-                        <button class="btn btn-danger"><i class="fa fa-google "> Google</i></button>
+                        <form action="http://localhost:3000/auth/google">
+                            <button class="btn btn-danger" type="submit"><i class="fa fa-google "> Google</i></button>
+                        </form>
                         <div class="px-2"></div>
-                        <button class="btn btn-primary"><i class="fa fa-facebook "> Facebook</i></button>
+                        <form action="http://localhost:3000/auth/facebook">
+                            <button class="btn btn-primary"><i class="fa fa-facebook "> Facebook</i></button>
+                        </form>
                     </div>
                 </form>
             </div>

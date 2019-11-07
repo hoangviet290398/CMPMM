@@ -16,7 +16,13 @@ const userSchema = new Schema({
     username: String,
     googleId: String,
     thumbnail: String,
-    }
+    },
+    facebook: {
+		id: String,
+		token: String,
+		email: String,
+		name: String
+	}
    
 });
 

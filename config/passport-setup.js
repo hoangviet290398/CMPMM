@@ -1,7 +1,9 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 const keys = require('./keys');
 const User = require('../models/user-model');
+var configAuth = require('./keys');
 
 passport.serializeUser((user, done) => {
     done(null, user.id);
@@ -21,7 +23,7 @@ passport.use(
         callbackURL: '/auth/google/redirect'
     }, (accessToken, refreshToken, profile, done) => {
         // check if user already exists in our own db
-        User.findOne({googleId: profile.id}).then((currentUser) => {
+        User.findOne({'google.googleId': profile.id}).then((currentUser) => {
             if(currentUser){
                 // already have this user
                 console.log('user is: ', currentUser);
@@ -42,3 +44,38 @@ passport.use(
         });
     })
 );
+
+passport.use(new FacebookStrategy({
+    clientID: configAuth.facebookAuth.clientID,
+    clientSecret: configAuth.facebookAuth.clientSecret,
+    callbackURL: configAuth.facebookAuth.callbackURL,
+    profileFields: ['email', 'displayName']
+  },
+  
+  function(accessToken, refreshToken, profile, done) {
+    console.log(profile);
+        process.nextTick(function(){
+            User.findOne({'facebook.id': profile.id}, function(err, user){
+                if(err)
+                    return done(err);
+                if(user)
+                    return done(null, user);
+                else {
+                    var newUser = new User();
+                    newUser.facebook.id = profile.id;
+                    newUser.facebook.token = accessToken;
+                    newUser.facebook.name = profile.name.displayName;
+                    newUser.facebook.email = profile.emails[0].value;
+
+                    newUser.save(function(err){
+                        if(err)
+                            throw err;
+                        return done(null, newUser);
+                    })
+                    console.log(profile);
+                }
+            });
+        });
+    }
+
+));
