@@ -1,4 +1,5 @@
 const passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 const keys = require('./keys');
@@ -14,6 +15,78 @@ passport.deserializeUser((id, done) => {
         done(null, user);
     });
 });
+
+
+passport.use('local-signup', new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password',
+    // nameField: 'name',
+    // phonenumberField: 'phonenumber',
+    // addressField: 'address',
+    passReqToCallback: true
+},
+function(req, email, password, done){
+    process.nextTick(function(){
+        User.findOne({'local.username': email}, function(err, user){
+            if(err)
+                return done(err);
+            if(user){
+                return done(null, false, req.flash('signupMessage', 'That email already taken'));
+            } 
+            if(!req.user) {
+                var newUser = new User();
+                newUser.local.username = email;
+                newUser.local.password = newUser.generateHash(password);
+                // newUser.local.name = name;
+                // newUser.local.phonenumber = phonenumber;
+                // newUser.local.address = address;
+
+
+                newUser.save(function(err){
+                    if(err)
+                        throw err;
+                    return done(null, newUser);
+                })
+            } else {
+                var user = req.user;
+                user.local.username = email;
+                user.local.password = user.generateHash(password);
+                // user.local.name = name;
+                // user.local.phonenumber = phonenumber;
+                // user.local.address = address;
+
+                user.save(function(err){
+                    if(err)
+                        throw err;
+                    return done(null, user);
+                })
+            }
+        })
+
+    });
+}));
+
+passport.use('local-login', new LocalStrategy({
+        usernameField: 'email',
+        passwordField: 'password',
+        passReqToCallback: true
+    },
+    function(req, email, password, done){
+        process.nextTick(function(){
+            User.findOne({ 'local.username': email}, function(err, user){
+                if(err)
+                    return done(err);
+                if(!user)
+                    return done(null, false, req.flash('loginMessage', 'No User found'));
+                if(!user.validPassword(password)){
+                    return done(null, false, req.flash('loginMessage', 'invalid password'));
+                }
+                return done(null, user);
+
+            });
+        });
+    }
+));
 
 passport.use(
     new GoogleStrategy({

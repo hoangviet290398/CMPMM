@@ -1,11 +1,28 @@
 const router = require('express').Router();
 const passport = require('passport');
+var flash=require("connect-flash");
+router.use(flash());
 
 // auth login
-router.get('/login', (req, res) => {
-    res.render('login', { user: req.user });
+router.get('/login', function(req, res){
+    res.render('login.ejs', { message: req.flash('loginMessage') });
+});
+router.post('/login', passport.authenticate('local-login', {
+    successRedirect: 'http://localhost:4200/',
+    failureRedirect: '/login',
+    failureFlash: true
+}));
+
+router.get('/signup', function(req, res){
+    res.render('signup.ejs', { message: req.flash('signupMessage') });
 });
 
+
+router.post('/signup', passport.authenticate('local-signup', {
+    successRedirect: '/',
+    failureRedirect: '/signup',
+    failureFlash: true
+}));
 // auth logout
 router.get('/logout', (req, res) => {
     req.logout();
@@ -30,6 +47,16 @@ router.get('/facebook', passport.authenticate('facebook', {scope: ['email']}));
 
 router.get('/facebook/callback', 
 	  passport.authenticate('facebook', { successRedirect: '/profile',
-	                                      failureRedirect: '/' }));
+                                          failureRedirect: '/' }));
+                                          
+router.get('/connect/local', function(req, res){
+		res.render('connect-local.ejs', { message: req.flash('signupMessage')});
+	});
+
+router.post('/connect/local', passport.authenticate('local-signup', {
+		successRedirect: '/profile',
+		failureRedirect: '/connect/local',
+		failureFlash: true
+}));
 
 module.exports = router;
