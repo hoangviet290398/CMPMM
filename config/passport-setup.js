@@ -33,7 +33,7 @@ function(req, email, password, done){
             if(user){
                 return done(null, false, req.flash('signupMessage', 'That email already taken'));
             } 
-            if(!req.user) {
+            else {
                 var newUser = new User();
                 newUser.local.username = email;
                 newUser.local.password = newUser.generateHash(password);
@@ -47,20 +47,7 @@ function(req, email, password, done){
                         throw err;
                     return done(null, newUser);
                 })
-            } else {
-                var user = req.user;
-                user.local.username = email;
-                user.local.password = user.generateHash(password);
-                // user.local.name = name;
-                // user.local.phonenumber = phonenumber;
-                // user.local.address = address;
-
-                user.save(function(err){
-                    if(err)
-                        throw err;
-                    return done(null, user);
-                })
-            }
+            } 
         })
 
     });
