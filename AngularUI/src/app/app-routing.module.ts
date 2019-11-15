@@ -5,6 +5,7 @@ import { BodyComponent } from './body/body.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { CartComponent } from './cart/cart.component';
+import { SignupComponent } from './signup/signup.component';
 
 
 const routes: Routes = [
@@ -12,7 +13,9 @@ const routes: Routes = [
   {path:'login',component:LoginComponent},
   {path:'product-detail',component:ProductDetailComponent},
   {path:'cart',component:CartComponent},
-  {path:'**',component:PageNotFoundComponent}
+  {path:'signup',component:SignupComponent},
+  {path:'**',component:PageNotFoundComponent},
+  
 ];
 
 @NgModule({
@@ -20,4 +23,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routingComponents=[LoginComponent,BodyComponent,PageNotFoundComponent,ProductDetailComponent,CartComponent]
+export const routingComponents=[LoginComponent,BodyComponent,PageNotFoundComponent,ProductDetailComponent,CartComponent,SignupComponent]
