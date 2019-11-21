@@ -1,0 +1,231 @@
+<app-adminheader></app-adminheader>
+<div class="py-2"></div>
+<div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
+        <div class="card text-center">
+            <div class="card-header">
+                <h3 class="text-center mt-3" style=" color:#777;letter-spacing: 10px; ">PRODUCTS MANAGEMENT</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-9"></div>
+                    <div class="col-sm-3">
+                        <a href="" class="btn btn-primary" data-toggle="modal" data-target="#addProduct"><i class="fa fa-plus"></i> Add a new product</a>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <h5>Product name</h5>
+                    </div>
+                    <div class="col-sm-2">
+                        <h4>Image url</h4>
+                    </div>
+                    <div class="col-sm-2">
+                        <h4>Category</h4>
+                    </div>
+                    <div class="col-sm-2">
+                        <h4>Description</h4>
+                    </div>
+                    <div class="col-sm-2">
+                        <h4>Price</h4>
+                    </div>
+                    <div class="col-sm-2"></div>
+
+                </div>
+                <hr style="height:1px;border:none;color:#333;background-color:#333;">
+
+                <div class="card py-4" *ngFor="let product of products; let i = index">
+                    <div class="row text-muted ">
+
+                        <div class="col-sm-2">
+                            <p>{{product.name}}</p>
+                        </div>
+                        <div class="col-sm-2">
+                            <p>{{product.img}}</p>
+                        </div>
+                        <div class="col-sm-2">
+                            <p>{{product.cateId}}</p>
+                        </div>
+                        <div class="col-sm-2">
+                            <p>{{product.des}}</p>
+                        </div>
+                        <div class="col-sm-2">
+                            <p>${{product.price}}</p>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="row">
+                                <!-- Edit-->
+                                <button type="button" (click)="getProductDetail(product._id)" class="btn btn-outline-success" data-toggle="modal" data-target="#editProduct">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                                <div class="px-1"></div>
+                                <!-- Delete-->
+                                <span class="" (click)="deleteProduct(product, i)">
+                                        <button type="button"class="btn btn-outline-danger"><i class="fa fa-trash"></i></button>
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-footer text-muted">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-sm-1"></div>
+<!-- Modal -->
+<!-- Add modal-->
+<div class="modal fade" id="addProduct" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add a new product</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="ProductForm" (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                        <label>Product name:</label>
+                        <input type="text" class="form-control" placeholder="Enter product name" formControlName="name">
+                        <div class="invalid-feedback d-block" *ngIf="submitted && myForm.name.errors?.required">
+                            Product name is required.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Image:</label>
+                        <input type="text" class="form-control" placeholder="Enter image url" formControlName="img">
+                        <div class="invalid-feedback d-block" *ngIf="submitted && myForm.img.errors?.required">
+                            Image url is required.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Category ID:</label>
+                        <input type="text" class="form-control" placeholder="Enter category ID" formControlName="cateId">
+                        <!-- error -->
+                        <span class="invalid-feedback d-block" *ngIf="submitted && myForm.cateId.errors?.required">
+                            Enter a category id.
+                        </span>
+                        <div class="invalid-feedback d-block" *ngIf="submitted && myForm.cateId.errors?.pattern">
+                            Enter Numbers Only
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Product description:</label>
+                        <input type="text" class="form-control" placeholder="Enter product description" formControlName="des">
+                        <div class="invalid-feedback d-block" *ngIf="submitted && myForm.des.errors?.required">
+                            Description is required.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Product price:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend">$</span>
+                            </div>
+                            <input type="number" class="form-control" placeholder="Enter product price" formControlName="price">
+
+                        </div>
+                        <!-- error -->
+                        <div class="invalid-feedback d-block" *ngIf="submitted && myForm.price.errors?.required">
+                            Enter a product price.
+                        </div>
+                        <div class="invalid-feedback d-block" *ngIf="submitted && myForm.price.errors?.pattern">
+                            Enter Numbers Only
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="valid-feedback d-block" *ngIf="isAdded">
+                            Added successfully!
+                        </div>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Edit modal -->
+<div class="modal fade" id="editProduct" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit the product</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="EditForm" (ngSubmit)="onEditSubmit()">
+                    <div class="form-group">
+                        <label>Product name:</label>
+                        <input type="text" class="form-control" placeholder="Enter product name" formControlName="name">
+                        <div class="invalid-feedback d-block" *ngIf="editSubmitted && editForm.name.errors?.required">
+                            Product name is required.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Image:</label>
+                        <input type="text" class="form-control" placeholder="Enter image url" formControlName="img">
+                        <div class="invalid-feedback d-block" *ngIf="editSubmitted && editForm.img.errors?.required">
+                            Image url is required.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Category ID:</label>
+                        <input type="text" class="form-control" placeholder="Enter category ID" formControlName="cateId">
+                        <!-- error -->
+                        <span class="invalid-feedback d-block" *ngIf="editSubmitted && editForm.cateId.errors?.required">
+                                    Enter a category id.
+                                </span>
+                        <div class="invalid-feedback d-block" *ngIf="editSubmitted && editForm.cateId.errors?.pattern">
+                            Enter Numbers Only
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Product description:</label>
+                        <input type="text" class="form-control" placeholder="Enter product description" formControlName="des">
+                        <div class="invalid-feedback d-block" *ngIf="editSubmitted && editForm.des.errors?.required">
+                            Description is required.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Product price:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend">$</span>
+                            </div>
+                            <input type="number" class="form-control" placeholder="Enter product price" formControlName="price">
+
+                        </div>
+                        <!-- error -->
+                        <div class="invalid-feedback d-block" *ngIf="editSubmitted && editForm.price.errors?.required">
+                            Enter a product price.
+                        </div>
+                        <div class="invalid-feedback d-block" *ngIf="editSubmitted && editForm.price.errors?.pattern">
+                            Enter Numbers Only
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="valid-feedback d-block" *ngIf="isEdited">
+                            Edit successfully!
+                        </div>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -6,16 +6,17 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { CartComponent } from './cart/cart.component';
 import { SignupComponent } from './signup/signup.component';
-import { AddproductComponent } from './addproduct/addproduct.component';
-
-
+import {AdminheaderComponent} from './adminpage/adminheader/adminheader.component';
+import {ProducthomeComponent} from './adminpage/productmanagement/producthome/producthome.component'
 const routes: Routes = [
   {path:'',component:BodyComponent},
   {path:'login',component:LoginComponent},
   {path:'product-detail',component:ProductDetailComponent},
   {path:'cart',component:CartComponent},
   {path:'signup',component:SignupComponent},
-  {path:'addproduct',component:AddproductComponent},
+  {path:'admin',component:AdminheaderComponent},
+  {path:'admin/products',component:ProducthomeComponent},
+  
   {path:'**',component:PageNotFoundComponent},
   
 ];
@@ -26,4 +27,4 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 export const routingComponents=[LoginComponent,BodyComponent,PageNotFoundComponent,ProductDetailComponent,CartComponent,SignupComponent
-,AddproductComponent]
+,AdminheaderComponent,ProducthomeComponent]

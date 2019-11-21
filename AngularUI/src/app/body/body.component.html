@@ -43,26 +43,26 @@
     <!-- {{products.length}} -->
     <div class="col-sm-2"></div>
     <div class="col-sm-9">
-            <div class="row pl-4">
+        <div class="row pl-4">
 
-                    <div class="col-sm-3  my-2 card mx-4" *ngFor="let i of products">
-                                    <div>
-                                        <a href="#"> <img class="card-img-top"  src="../../assets/images/{{i.img}}" alt=""></a>
-                                    </div>
-                                    <div class="card-body text-center">
-                                        <a href="#">
-                                            <h5 class="card-title">{{i.name}}</h5>
-                                        </a>
-                                        <strong>
-                                            <p class="text-dark">${{i.price}}</p>
-                                        </strong>
-                                        <a href="#" class="btn btn-primary btn-danger">Add to cart</a>
-                                    </div>
-                    </div>
-                
+            <div class="col-sm-3  my-2 card mx-4" *ngFor="let i of products">
+                <div>
+                    <a href="#"> <img class="card-img-top" style="height: auto;" src="../../assets/images/{{i.img}}" alt=""></a>
+                </div>
+                <div class="card-body text-center">
+                    <a href="#">
+                        <h5 class="card-title">{{i.name}}</h5>
+                    </a>
+                    <strong>
+                        <p class="text-dark">${{i.price}}</p>
+                    </strong>
+                    <a href="#" class="btn btn-primary btn-danger">Add to cart</a>
+                </div>
+            </div>
+
+        </div>
+
     </div>
-    
-</div>
 
     <div class="col-sm-1"></div>
 </div>
