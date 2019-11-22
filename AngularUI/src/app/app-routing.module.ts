@@ -11,7 +11,7 @@ import {ProducthomeComponent} from './adminpage/productmanagement/producthome/pr
 const routes: Routes = [
   {path:'',component:BodyComponent},
   {path:'login',component:LoginComponent},
-  {path:'product-detail',component:ProductDetailComponent},
+  {path:'product-detail/:id',component:ProductDetailComponent},
   {path:'cart',component:CartComponent},
   {path:'signup',component:SignupComponent},
   {path:'admin',component:AdminheaderComponent},

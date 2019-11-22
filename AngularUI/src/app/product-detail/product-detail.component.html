@@ -1,17 +1,16 @@
 <div class="row">
     <div class="col-sm-2"></div>
     <div class="col-sm-8 card my-4">
-        <div class="row">
-            <div class="col-sm-6">
-                <img style="width:100%;height:100%" src="../../assets/images/product04.png" alt="">
+        <div class="row" *ngIf="product">
+            <div class="col-sm-6 py-2">
+                <img style="width:100%;height:100%" src="../../assets/images/{{product.img}}" alt="">
             </div>
-            <div class="col-sm-6">
-                <h1 class="mt-5">Title</h1>
+            <div class="col-sm-6 py-2">
+                <h1 class="mt-5">{{product.name}}</h1>
 
-                <p>Living valley had silent eat merits esteem bed. In last an or went wise as left. Visited civilly am demesne so colonel he calling. So unreserved do interested increasing sentiments. Vanity day giving points within six not law. Few impression
-                    difficulty his use has comparison decisively.
+                <p>{{product.des}}
                 </p>
-                <h2 class="text-success">$99.00</h2>
+                <h2 class="text-success">${{product.price}}</h2>
                 <button type="button" class="btn btn-outline-danger">Add to cart</button>
 
             </div>

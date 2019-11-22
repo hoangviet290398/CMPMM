@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ApiService } from '../service/api.service';
 
 
 @Component({
@@ -8,6 +9,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   styleUrls: ['./body.component.css']
 })
 export class BodyComponent implements OnInit {
+  productDetailId="";
   products = [];
   httpOption = {
     headers: new HttpHeaders({
@@ -15,7 +17,8 @@ export class BodyComponent implements OnInit {
 
     })
   };
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient,
+    private apiService: ApiService) { }
 
   ngOnInit() {
     this.httpClient.get("http://localhost:3000/product", this.httpOption)
@@ -28,10 +31,9 @@ export class BodyComponent implements OnInit {
         console.log(err)
       });
   }
+ 
 
-  // getProducts() {
-  //   return
-  // }
+  
 
 }
 
