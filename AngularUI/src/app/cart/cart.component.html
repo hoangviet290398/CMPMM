@@ -1,45 +1,75 @@
-<div class="row">
-    <div class="col-sm-1"></div>
-    <div class="col-sm-10">
-        <div class="row mt-4">
-            <div class="col-sm-3">
-                <h5>PRODUCT IMAGE</h5>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+            <div class="">
+                <h1 class="text-center"><i class="fa fa-shopping-cart"></i> YOUR CART</h1>
             </div>
-            <div class="col-sm-2">
-                <h4>Quantity</h4>
-            </div>
-            <div class="col-sm-5">
-                <h4>Description</h4>
-            </div>
-            <div class="col-sm-2"></div>
+            <div class="row">
+                <div class="col-sm-3 pb-2">
+                    <a href="" class="btn btn-outline-dark">CONTINUE SHOPPING</a>
+                </div>
 
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3">
+                    <h5>Product image</h5>
+                </div>
+
+                <div class="col-sm-5">
+                    <h4>Description</h4>
+                </div>
+                <div class="col-sm-2">
+                    <h4>Quantity</h4>
+                </div>
+                <div class="col-sm-2"></div>
+
+            </div>
+            <hr style="height:3px;border:none;color:#333;background-color:#333;">
+            <div class="" *ngFor="let item of items ">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <img style="width:80%;height:80%" src="../../assets/images/{{item.product.img}}" alt="">
+                    </div>
+
+                    <div class="col-sm-5">
+                        <h4>{{item.product.name}}</h4>
+
+                        <p>{{item.product.des}}
+                        </p>
+                        <h2 class="text-danger">${{item.product.price}}</h2>
+                    </div>
+                    <div class="col-sm-2 py-5">
+                        <input class="text-center pl-3" type="number" (change)="changedNumber($event,item.product._id)" value="{{item.quantity}}" min="0" max="1000" step="1" />
+
+                    </div>
+                    <div class="col-sm-2 p-5">
+                        <button type="button" (click)="remove(item.product._id)" class="btn btn-outline-dark">REMOVE</button>
+                    </div>
+                </div>
+                <hr style="height:1px;border:none;color:#333;background-color:#333;">
+
+            </div>
+            <div class="float-right">
+                <div class="">
+                    <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary </div>
+                    <div class="p-4">
+                        <p class="font-italic mb-4">Shipping and additional costs are not included.</p>
+                        <ul class="list-unstyled mb-4">
+                            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order Subtotal </strong><strong>${{subTotal|number:'1.2-2'}}</strong></li>
+                            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tax</strong><strong>${{tax|number:'1.2-2'}}</strong></li>
+                            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
+                                <h5 class="font-weight-bold">${{total|number:'1.2-2'}}</h5>
+                            </li>
+                        </ul><a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <hr style="height:1px;border:none;color:#333;background-color:#333;">
-        <div class="row">
-            <div class="col-sm-3">
-                <img style="width:80%;height:80%" src="../../assets/images/product04.png" alt="">
-            </div>
-            <div class="col-sm-2 py-5">
-                <input class="text-center pl-3" type="number" value="1" min="0" max="1000" step="1" />
-
-            </div>
-            <div class="col-sm-5">
-                <h4>Title</h4>
-
-                <p>Living valley had silent eat merits esteem bed.
-                </p>
-                <h2 class="text-danger">$99.00</h2>
-            </div>
-            <div class="col-sm-2 p-5">
-                <button type="button" class="btn btn-outline-dark">REMOVE</button>
-            </div>
-
-        </div>
-        <hr style="height:1px;border:none;color:#333;background-color:#333;">
-
+        <div class="col-sm-1"></div>
+        <script>
+            $("input[type='number']").inputSpinner();
+        </script>
     </div>
-    <div class="col-sm-1"></div>
-    <script>
-        $("input[type='number']").inputSpinner();
-    </script>
 </div>

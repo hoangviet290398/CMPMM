@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ApiService } from '../service/api.service';
+import { ProductService } from '../service/product.service';
+import {Router} from '@angular/router'
 
 
 @Component({
@@ -9,32 +11,33 @@ import { ApiService } from '../service/api.service';
   styleUrls: ['./body.component.css']
 })
 export class BodyComponent implements OnInit {
-  productDetailId="";
-  products = [];
-  httpOption = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-
-    })
-  };
-  constructor(private httpClient: HttpClient,
-    private apiService: ApiService) { }
+  products:any = [];
+  
+  constructor(private apiService: ApiService, private productService:ProductService, private router:Router) { }
 
   ngOnInit() {
-    this.httpClient.get("http://localhost:3000/product", this.httpOption)
-      .toPromise()
-      .then(res => {
-        console.log(res);
-        this.products = Object.values(res);
-      }).
-      catch(err => {
-        console.log(err)
-      });
+    this.readProducts();
+    this.startProductServices();
   }
- 
-
   
-
+  //Get products
+  readProducts(){
+    this.apiService.getProducts().subscribe((data) => {
+     this.products = data;
+    })    
+  } 
+  startProductServices()
+  {
+    console.log('product service')
+    this.productService.readProducts();
+  }
+  AddtoCart(id)
+  {
+    this.productService.productId=id;
+    
+    console.log('body product id: ',this.productService.productId);
+    this.router.navigate(['/cart']);
+  }
 }
 
 
