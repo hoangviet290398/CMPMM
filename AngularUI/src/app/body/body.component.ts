@@ -37,6 +37,7 @@ export class BodyComponent implements OnInit {
     
     console.log('body product id: ',this.productService.productId);
     this.router.navigate(['/cart']);
+    
   }
 }
 

@@ -8,12 +8,14 @@ import { CartComponent } from './cart/cart.component';
 import { SignupComponent } from './signup/signup.component';
 import {AdminheaderComponent} from './adminpage/adminheader/adminheader.component';
 import {ProducthomeComponent} from './adminpage/productmanagement/producthome/producthome.component'
+import { CheckoutComponent } from './checkout/checkout.component';
 const routes: Routes = [
   {path:'',component:BodyComponent},
   {path:'login',component:LoginComponent},
   {path:'signup',component:SignupComponent},
   {path:'product-detail/:id',component:ProductDetailComponent},
   {path:'cart',component:CartComponent},
+  {path:'cart/checkout',component:CheckoutComponent},
   {path:'admin',component:AdminheaderComponent},
   {path:'admin/products',component:ProducthomeComponent},
   
@@ -27,4 +29,4 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 export const routingComponents=[LoginComponent,BodyComponent,PageNotFoundComponent,ProductDetailComponent,CartComponent,SignupComponent
-,AdminheaderComponent,ProducthomeComponent]
+,AdminheaderComponent,ProducthomeComponent,CheckoutComponent]

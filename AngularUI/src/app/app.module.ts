@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductService } from './service/product.service';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { ProductService } from './service/product.service';
     AppComponent,
     HeaderComponent,
     routingComponents,
+    CheckoutComponent,
     
     
     ],

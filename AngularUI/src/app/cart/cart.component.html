@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-1"></div>
-        <div class="col-sm-10">
+        <div class="col-sm-10  my-5 card shadow">
             <div class="">
                 <h1 class="text-center"><i class="fa fa-shopping-cart"></i> YOUR CART</h1>
             </div>
@@ -51,9 +51,9 @@
                 <hr style="height:1px;border:none;color:#333;background-color:#333;">
 
             </div>
-            <div class="float-right">
+            <div class=" float-right col-sm-6 mt-2 mb-4 card shadow">
                 <div class="">
-                    <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary </div>
+                    <div class="bg-light rounded-pill px-4 py-3 mt-3 text-uppercase font-weight-bold">Order summary </div>
                     <div class="p-4">
                         <p class="font-italic mb-4">Shipping and additional costs are not included.</p>
                         <ul class="list-unstyled mb-4">
@@ -62,7 +62,7 @@
                             <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
                                 <h5 class="font-weight-bold">${{total|number:'1.2-2'}}</h5>
                             </li>
-                        </ul><a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
+                        </ul><button (click)="toCheckout(items,subTotal,tax,total)" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</button>
                     </div>
                 </div>
             </div>

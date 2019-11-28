@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Item } from '../entities/item.entity';
 import { ProductService } from '../service/product.service';
+import {Router} from '@angular/router'
 
 @Component({
 	selector: 'app-cart',
@@ -21,7 +22,8 @@ export class CartComponent implements OnInit {
 	private id:string;
 	constructor(
 		private activatedRoute: ActivatedRoute,
-		private productService: ProductService
+		private productService: ProductService,
+		private router:Router
 	) {
 
 	}
@@ -82,7 +84,7 @@ export class CartComponent implements OnInit {
 		this.tax=1;
 		this.items = [];
 		let cart = JSON.parse(localStorage.getItem('cart'));
-
+		console.log('cart items: ',this.productService.cartItems);
 		console.log('cart loadcart: ',cart);
 		for (var i = 0; i < cart.length; i++) {
 			let item = JSON.parse(cart[i]);
@@ -136,4 +138,15 @@ export class CartComponent implements OnInit {
 		this.loadCart();
 		this.loadCart();
 	}
+	toCheckout(cartItems,subTotal,tax,total)
+  {
+    this.productService.cartItems=cartItems;
+	this.productService.subTotal=subTotal;
+	this.productService.tax=tax;
+	this.productService.total=total;
+	console.log('cart product id: ',this.productService.cartItems);
+	console.log('price pass: ',total);
+    this.router.navigate(['/cart/checkout']);
+    
+  }
 }
