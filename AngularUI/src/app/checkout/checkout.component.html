@@ -26,16 +26,18 @@
                                     <th scope="col" class="border-0 bg-light">
                                         <div class="py-2 text-uppercase">Quantity</div>
                                     </th>
-
+                                    <th scope="col" class="border-0 bg-light">
+                                        <div class="py-2 text-uppercase">Sub total</div>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let item of cartItems ">
+                                <tr *ngFor="let item of cartItems;let i = index ">
                                     <th scope="row" class="border-0">
                                         <div class="p-2">
                                             <img src="../../assets/images/{{item.product.img}}" alt="" width="70" class="img-fluid rounded shadow-sm">
                                             <div class="ml-3 d-inline-block align-middle">
-                                                <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">{{item.product.name}}</a></h5>
+                                                <h5 class="mb-0"> <a href="/product-detail/{{item.product._id}}" class="text-dark d-inline-block align-middle">{{item.product.name}}</a></h5>
                                             </div>
                                         </div>
                                     </th>
@@ -43,7 +45,8 @@
                                         <strong>${{item.product.price}}</strong></td>
                                     <td class="border-0 align-middle">
                                         <strong>{{item.quantity}}</strong></td>
-
+                                    <td class="border-0 align-middle">
+                                        <strong>${{singleItemTotal[i]|number:'1.2-2'}}</strong></td>
                                 </tr>
 
                             </tbody>
@@ -56,31 +59,33 @@
             <div class="row py-5 p-4 bg-white rounded shadow">
                 <div class="col-sm-6">
                     <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Billing address</div>
+                    <form [formGroup]="InfoForm" (ngSubmit)="onSubmit()">
+                        <div class="px-3 py-4">
+                            <div class="form-group">
+                                <input type="text" class="form-control mb-2" formControlName="name" placeholder="Customer name">
+                            </div>
+                            <div class="p-1"></div>
+                            <div class="form-group ">
+                                <input type="text" class="form-control" formControlName="address" placeholder="Address">
+                            </div>
+                            <div class="p-1"></div>
 
-                    <div class="px-3 py-4">
-                        <div class="form-group">
-                            <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Customer name">
-                        </div>
-                        <div class="p-1"></div>
-                        <div class="form-group ">
-                            <input type="text" class="form-control" id="inputAddress" placeholder="Address">
-                        </div>
-                        <div class="p-1"></div>
+                            <div class="form-group ">
+                                <input type="number" class="form-control" formControlName="phoneNumber" placeholder="Phone number">
+                            </div>
+                            <div class="p-1"></div>
 
-                        <div class="form-group ">
-                            <input type="number" class="form-control" id="inputAddress" placeholder="Phone number">
-                        </div>
-                        <div class="p-1"></div>
-
-                        <div class="form-group">
-                            <div class="input-group mb-2">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">@</div>
+                            <div class="form-group">
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">@</div>
+                                    </div>
+                                    <input type="email" class="form-control" formControlName="emailAddress" placeholder="Email address">
                                 </div>
-                                <input type="email" class="form-control" id="inlineFormInputGroup" placeholder="Email address">
                             </div>
                         </div>
-                    </div>
+                    </form>
+
                 </div>
                 <div class="col-sm-6">
                     <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary </div>
@@ -92,7 +97,7 @@
                             <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
                                 <h5 class="font-weight-bold">${{total|number:'1.2-2'}}</h5>
                             </li>
-                        </ul><a href="cart/checkout" class="btn btn-dark rounded-pill py-2 btn-block">Checkout</a>
+                        </ul><button (click)="onSubmit()" class="btn btn-dark rounded-pill py-2 btn-block">Checkout</button>
                     </div>
                 </div>
             </div>

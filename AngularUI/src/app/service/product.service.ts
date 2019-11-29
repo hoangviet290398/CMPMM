@@ -7,11 +7,7 @@ import { Product } from '../entities/product.entity';
 
 @Injectable()
 export class ProductService  {
-    //data for checkout page
-    cartItems:any;
-    subTotal:number;
-    tax:number;
-    total:number;
+  
     //
     productId;// use for cart
    products: any=[];

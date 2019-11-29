@@ -11,7 +11,7 @@
                 <p>{{product.des}}
                 </p>
                 <h2 class="text-success">${{product.price}}</h2>
-                <button type="button" class="btn btn-outline-danger">Add to cart</button>
+                <button type="button" (click)="AddtoCart(product._id)" class="btn btn-outline-danger">Add to cart</button>
 
             </div>
         </div>
