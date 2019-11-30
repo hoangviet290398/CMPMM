@@ -63,15 +63,27 @@
                         <div class="px-3 py-4">
                             <div class="form-group">
                                 <input type="text" class="form-control mb-2" formControlName="name" placeholder="Customer name">
+                                <div class="invalid-feedback d-block" *ngIf="submitted && myForm.name.errors?.required">
+                                    Customer name is required.
+                                </div>
                             </div>
                             <div class="p-1"></div>
                             <div class="form-group ">
                                 <input type="text" class="form-control" formControlName="address" placeholder="Address">
+                                <div class="invalid-feedback d-block" *ngIf="submitted && myForm.address.errors?.required">
+                                    Address is required.
+                                </div>
                             </div>
                             <div class="p-1"></div>
 
                             <div class="form-group ">
-                                <input type="number" class="form-control" formControlName="phoneNumber" placeholder="Phone number">
+                                <input type="text" class="form-control" formControlName="phoneNumber" placeholder="Phone number">
+                                <div class="invalid-feedback  d-block" *ngIf="submitted && myForm.phoneNumber.errors?.required">
+                                    Phone number is required
+                                </div>
+                                <div class="invalid-feedback  d-block" *ngIf="submitted && myForm.phoneNumber.errors?.pattern">
+                                    Enter numbers Only
+                                </div>
                             </div>
                             <div class="p-1"></div>
 
@@ -81,6 +93,12 @@
                                         <div class="input-group-text">@</div>
                                     </div>
                                     <input type="email" class="form-control" formControlName="emailAddress" placeholder="Email address">
+                                    <div class="invalid-feedback  d-block" *ngIf="submitted && myForm.emailAddress.errors?.required">
+                                        Enter your email.
+                                    </div>
+                                    <div class="invalid-feedback  d-block" *ngIf="submitted && myForm.emailAddress.errors?.pattern">
+                                        Enter valid email.
+                                    </div>
                                 </div>
                             </div>
                         </div>

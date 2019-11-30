@@ -9,6 +9,7 @@ import { SignupComponent } from './signup/signup.component';
 import {AdminheaderComponent} from './adminpage/adminheader/adminheader.component';
 import {ProducthomeComponent} from './adminpage/productmanagement/producthome/producthome.component'
 import { CheckoutComponent } from './checkout/checkout.component';
+import { CheckoutcompleteComponent } from './checkoutcomplete/checkoutcomplete.component';
 const routes: Routes = [
   {path:'',component:BodyComponent},
   {path:'login',component:LoginComponent},
@@ -18,7 +19,7 @@ const routes: Routes = [
   {path:'cart/checkout',component:CheckoutComponent},
   {path:'admin',component:AdminheaderComponent},
   {path:'admin/products',component:ProducthomeComponent},
-  
+  {path:'checkoutcomplete',component:CheckoutcompleteComponent},
   {path:'**',component:PageNotFoundComponent},
   
 ];
@@ -29,4 +30,4 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 export const routingComponents=[LoginComponent,BodyComponent,PageNotFoundComponent,ProductDetailComponent,CartComponent,SignupComponent
-,AdminheaderComponent,ProducthomeComponent,CheckoutComponent]
+,AdminheaderComponent,ProducthomeComponent,CheckoutComponent,CheckoutcompleteComponent]

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../service/product.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ApiService } from '../service/api.service';
+import {formatDate} from '@angular/common';
+
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -12,10 +14,13 @@ export class CheckoutComponent implements OnInit {
   cart: any;
   cartItems: any = [];
   singleItemTotal:any=[];
+  singleItemPrice:any;
   subTotal: number;
   tax: number;
   total: number;
   InfoForm:FormGroup;
+  submitted:any;
+  createdDay:any;
   constructor(private productService: ProductService,public fb: FormBuilder,private apiService:ApiService)
    { 
     this.infoForm();
@@ -35,8 +40,10 @@ export class CheckoutComponent implements OnInit {
     for (var i = 0; i < this.cart.length; i++) 
     {
       this.cartItems[i] = JSON.parse(this.cart[i]);
+      this.singleItemPrice=(this.cartItems[i].product.price * this.cartItems[i].quantity);
       console.log('cart item', this.cartItems[i].product.price)
-      this.singleItemTotal[i]=this.cartItems[i].product.price * this.cartItems[i].quantity;
+      this.singleItemTotal[i]=this.singleItemPrice.toFixed(2);
+      console.log('single item total', this.singleItemTotal[i]);
       this.subTotal += this.cartItems[i].product.price * this.cartItems[i].quantity;
       console.log('sub total', this.subTotal)
       this.tax = this.subTotal * 10 / 100;
@@ -58,15 +65,24 @@ export class CheckoutComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submitted = true;
+    this.createdDay=formatDate(new Date(), 'dd/MM/yyyy', 'en');
+    
+    if (!this.InfoForm.valid) {
+      return false;
+    } 
+    else {
     let invoice={
       info:this.InfoForm.value,
-      subTotal:this.subTotal,
-      tax:this.tax,
-      total:this.total,
-      cartItems:this.cartItems
+
+      subTotal:this.subTotal.toFixed(2),
+      tax:this.tax.toFixed(2),
+      total:this.total.toFixed(2),
+      singleItemPrice:this.singleItemTotal,
+      cartItems:this.cartItems,
+      createdDay:this.createdDay
 
     }
-    //this.submitted = true;
     
       this.apiService.sendEmail(invoice).subscribe(
         (res) => {
@@ -75,7 +91,7 @@ export class CheckoutComponent implements OnInit {
         }, (error) => {
           console.log(error);
         });
-    
+      }
     
   }
 }
