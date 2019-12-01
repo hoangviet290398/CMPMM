@@ -34,14 +34,15 @@
                     </div>
 
                     <div class="col-sm-5">
-                        <h4>{{item.product.name}}</h4>
+                        <h4><a href="/product-detail/{{item.product._id}}" class="text-dark ">{{item.product.name}}</a></h4>
 
-                        <p>{{item.product.des}}
+                        <p>
+                            {{item.product.des}}
                         </p>
                         <h2 class="text-danger">${{item.product.price}}</h2>
                     </div>
                     <div class="col-sm-2 py-5">
-                        <input class="text-center pl-3" type="number" (change)="changedNumber($event,item.product._id)" value="{{item.quantity}}" min="0" max="1000" step="1" />
+                        <input class="text-center pl-3" type="number" (change)="changedNumber($event,item.product._id)" value="{{item.quantity}}" min="1" max="1000" step="1" />
 
                     </div>
                     <div class="col-sm-2 p-5">
@@ -51,21 +52,24 @@
                 <hr style="height:1px;border:none;color:#333;background-color:#333;">
 
             </div>
-            <div class=" float-right col-sm-6 mt-2 mb-4 card shadow">
-                <div class="">
-                    <div class="bg-light rounded-pill px-4 py-3 mt-3 text-uppercase font-weight-bold">Order summary </div>
-                    <div class="p-4">
-                        <p class="font-italic mb-4">Shipping and additional costs are not included.</p>
-                        <ul class="list-unstyled mb-4">
-                            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order Subtotal </strong><strong>${{subTotal|number:'1.2-2'}}</strong></li>
-                            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tax</strong><strong>${{tax|number:'1.2-2'}}</strong></li>
-                            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
-                                <h5 class="font-weight-bold">${{total|number:'1.2-2'}}</h5>
-                            </li>
-                        </ul><button (click)="toCheckout(items,subTotal,tax,total)" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</button>
+            <div class="row">
+                <div class="col-sm-5 "></div>
+                <div class="col-sm-6 ml-5 mt-2 mb-4  card shadow">
+                    <div class="">
+                        <div class="bg-light rounded-pill px-4 py-3 mt-3 text-uppercase font-weight-bold">Sub total </div>
+                        <div class="p-4">
+                            <p class="font-italic mb-4">Shipping, tax additional costs are not included.</p>
+                            <ul class="list-unstyled mb-4">
+
+                                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Item total</strong>
+                                    <h5 class="font-weight-bold">${{subTotal|number:'1.2-2'}}</h5>
+                                </li>
+                            </ul><button (click)="toCheckout()" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</button>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
         <div class="col-sm-1"></div>
         <script>

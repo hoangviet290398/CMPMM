@@ -10,13 +10,14 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 export class ApiService {
   
   baseUri:string = 'http://localhost:3000/product';
+
   loginUri:string = 'http://localhost:3000/auth/login';
-  signupUri:string = 'http://localhost:3000/auth/signup'
-  
-  headers = new HttpHeaders().set('Access-Control-Allow-Origin', '*').set('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS')
-  .set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, content-type, Accept');
-  
- 
+  signupUri:string = 'http://localhost:3000/auth/signup' 
+
+  emailUrl:string='http://localhost:3000/sendmail';
+  headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+
   constructor(private http: HttpClient) { }
 
   // Create
@@ -90,5 +91,13 @@ export class ApiService {
     console.log(errorMessage);
     return throwError(errorMessage);
   }
-
+  
+  //send email
+  sendEmail(data)
+  {
+    console.log('data: ',data);
+    return this.http.post(this.emailUrl,data).pipe(
+      catchError(this.errorMgmt)
+    );
+  }
 }

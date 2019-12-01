@@ -9,6 +9,8 @@ import { HeaderComponent } from './header/header.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductService } from './service/product.service';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { CheckoutcompleteComponent } from './checkoutcomplete/checkoutcomplete.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -17,6 +19,8 @@ import { CheckoutComponent } from './checkout/checkout.component';
     HeaderComponent,
     routingComponents,
     CheckoutComponent,
+    CheckoutcompleteComponent,
+    FooterComponent,
     
     
     ],
