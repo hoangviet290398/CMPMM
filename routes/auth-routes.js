@@ -8,8 +8,8 @@ router.get('/login', function(req, res) {
     res.render('login.ejs', { message: req.flash('loginMessage') });
 });
 router.post('/login', passport.authenticate('local-login', {
-    successRedirect: 'http://localhost:4200/',
-    failureRedirect: '/login',
+    successRedirect: '/profile',
+    failureRedirect: 'http://localhost:4200/login',
     failureFlash: true
 }));
 
@@ -19,14 +19,18 @@ router.get('/signup', function(req, res) {
 
 
 router.post('/signup', passport.authenticate('local-signup', {
-    successRedirect: '/',
-    failureRedirect: '/signup',
+    successRedirect: 'http://localhost:4200/login',
+    failureRedirect: 'http://localhost:4200/signup',
     failureFlash: true
 }));
 // auth logout
 router.get('/logout', (req, res) => {
     req.logout();
     res.redirect('/');
+});
+
+router.get('/profile', isLoggedIn, function(req, res){
+    res.render('profile.ejs', { user: req.user });
 });
 
 // auth with google+
@@ -60,5 +64,13 @@ router.post('/connect/local', passport.authenticate('local-signup', {
     failureRedirect: '/connect/local',
     failureFlash: true
 }));
+
+function isLoggedIn(req, res, next) {
+	if(req.isAuthenticated()){
+		return next();
+	}
+
+	res.redirect('/login');
+}
 
 module.exports = router;

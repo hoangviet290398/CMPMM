@@ -1,16 +1,19 @@
-// const mongoose = require('mongoose');
-// const Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-// const categorySchema = new Schema({
-//     name 		:  String,
-//     email 	    : String,
-//     sdt 		: String,
-//     msg 		: String,
-//     cart 		: Object,
-//     st 		: Number
+const cartSchema = new Schema({
+    name 		: String,
+    email 	    : String,
+    address     : String,
+    phone 		: String,
+    total       : Number,
+    cart: [{
+        productId: String,
+        quantity: Number
+    }],
+    
+});
 
-// });
+const Cart = mongoose.model('cart', cartSchema);
 
-// const Category = mongoose.model('category', categorySchema);
-
-// module.exports = Category;
+module.exports = Cart;

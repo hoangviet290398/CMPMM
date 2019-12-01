@@ -4,19 +4,18 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
     local: {
-		username: String,
+	    	username: String,
         password: String,
-        // name:String,
-        // email:String,
-        // phonenumber:String,
-        // address:String,
-        // avatar:String,
-        // role:String
+      
     },
+    
+    role:String,
+    avatar:String,
     google: {
     username: String,
     googleId: String,
     thumbnail: String,
+    token:String
     },
     facebook: {
 		id: String,

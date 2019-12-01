@@ -10,8 +10,13 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 export class ApiService {
   
   baseUri:string = 'http://localhost:3000/product';
-  headers = new HttpHeaders().set('Content-Type', 'application/json');
-
+  loginUri:string = 'http://localhost:3000/auth/login';
+  signupUri:string = 'http://localhost:3000/auth/signup'
+  
+  headers = new HttpHeaders().set('Access-Control-Allow-Origin', '*').set('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS')
+  .set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, content-type, Accept');
+  
+ 
   constructor(private http: HttpClient) { }
 
   // Create
@@ -53,6 +58,23 @@ export class ApiService {
     return this.http.delete(url, { headers: this.headers }).pipe(
       catchError(this.errorMgmt)
     )
+  }
+
+  //Login
+  login(data): Observable<any> {
+    let url = `${this.loginUri}`;
+    return this.http.post(url, data,{responseType:"text"})
+      .pipe(
+        catchError(this.errorMgmt)
+      )
+  }
+
+  signup(data): Observable<any> {
+    let url = `${this.signupUri}`;
+    return this.http.post(url, data,{responseType:"text", headers:this.headers})
+      .pipe(
+        catchError(this.errorMgmt)
+      )
   }
 
   // Error handling 

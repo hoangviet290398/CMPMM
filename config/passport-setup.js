@@ -37,6 +37,7 @@ function(req, email, password, done){
                 var newUser = new User();
                 newUser.local.username = email;
                 newUser.local.password = newUser.generateHash(password);
+                newUser.role = 'user';
                 // newUser.local.name = name;
                 // newUser.local.phonenumber = phonenumber;
                 // newUser.local.address = address;
@@ -51,6 +52,7 @@ function(req, email, password, done){
                 var user = req.user;
                 user.local.username = email;
                 user.local.password = user.generateHash(password);
+                user.role = 'user';
                 // user.local.name = name;
                 // user.local.phonenumber = phonenumber;
                 // user.local.address = address;
@@ -107,8 +109,10 @@ passport.use(
                     google:{
                     googleId: profile.id,
                     username: profile.displayName,
+                    token:accessToken,
                     thumbnail: profile._json.image.url
-                    }
+                    },
+                    role:'user'
                 }).save().then((newUser) => {
                     console.log('created new user: ', newUser);
                     done(null, newUser);
@@ -139,7 +143,7 @@ passport.use(new FacebookStrategy({
                     newUser.facebook.token = accessToken;
                     newUser.facebook.name = profile.name.displayName;
                     newUser.facebook.email = profile.emails[0].value;
-
+                    newUser.role = 'user';
                     newUser.save(function(err){
                         if(err)
                             throw err;
