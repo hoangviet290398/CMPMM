@@ -26,9 +26,9 @@
                     </form>
                     <p class="pt-2">Or login using:</p>
                     <div class="ml-0 mt-2 row">
-                        <a href="http://localhost:3000/auth/google" class="btn btn-danger"><i class="fa fa-google "> Google</i></a>
+                        <button (click)="signInWithGoogle()" class="btn btn-danger"><i class="fa fa-google "> Google</i></button>
                         <div class="px-2"></div>
-                        <a href="http://localhost:3000/auth/facebook" class="btn btn-primary"><i class="fa fa-facebook "> Facebook</i></a>
+                        <button (click)="signInWithFB()" class="btn btn-primary"><i class="fa fa-facebook "> Facebook</i></button>
                     </div>
                 </form>
             </div>

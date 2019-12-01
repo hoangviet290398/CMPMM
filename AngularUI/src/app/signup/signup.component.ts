@@ -24,10 +24,11 @@ export class SignupComponent implements OnInit {
    
     console.log(this.SignupForm.value)
     this.apiService.signup(this.SignupForm.value).subscribe(
+      
       (res) => {
         console.log('Signup successfully');
         console.log(res);
-        //this.route.navigateByUrl('/');
+        this.route.navigateByUrl('/login');
       
         //this.ngZone.run(() => this.router.navigateByUrl('/product'))
       }, (error) => {

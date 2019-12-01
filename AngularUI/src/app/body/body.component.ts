@@ -12,14 +12,18 @@ import {Router} from '@angular/router'
 })
 export class BodyComponent implements OnInit {
   products:any = [];
+  profile:object;
   
   constructor(private apiService: ApiService, private productService:ProductService, private router:Router) { }
 
   ngOnInit() {
     this.readProducts();
     this.startProductServices();
+   
+    
   }
-  
+
+
   //Get products
   readProducts(){
     this.apiService.getProducts().subscribe((data) => {

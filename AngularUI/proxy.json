@@ -1,7 +1,7 @@
 {
     "/auth/*": {
         "target": "http://localhost:3000",
-       
+        "pathRewrite": {"^/auth" : ""},
         "secure": "false",
         "changeOrigin": true
     }

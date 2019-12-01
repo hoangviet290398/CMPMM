@@ -15,8 +15,9 @@ export class ApiService {
   signupUri:string = 'http://localhost:3000/auth/signup' 
 
   emailUrl:string='http://localhost:3000/sendmail';
-  headers = new HttpHeaders().set('Content-Type', 'application/json');
 
+  
+  headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   constructor(private http: HttpClient) { }
 
@@ -31,6 +32,7 @@ export class ApiService {
 
   // Get all Products
   getProducts() {
+    
     return this.http.get(`${this.baseUri}`);
   }
 
@@ -74,9 +76,12 @@ export class ApiService {
     let url = `${this.signupUri}`;
     return this.http.post(url, data,{responseType:"text", headers:this.headers})
       .pipe(
+      
         catchError(this.errorMgmt)
       )
   }
+  
+ 
 
   // Error handling 
   errorMgmt(error: HttpErrorResponse) {

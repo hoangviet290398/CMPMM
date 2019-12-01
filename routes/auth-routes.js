@@ -7,22 +7,20 @@ router.use(flash());
 router.get('/login', function(req, res) {
     res.render('login.ejs', { message: req.flash('loginMessage') });
 });
-router.post('/login', passport.authenticate('local-login', {
-    successRedirect: '/profile',
-    failureRedirect: 'http://localhost:4200/login',
-    failureFlash: true
-}));
+router.post('/login', passport.authenticate('local-login'),(req, res) => {
+   
+    res.json({message:"Login successfully!"});
+});
 
 router.get('/signup', function(req, res) {
     res.render('signup.ejs', { message: req.flash('signupMessage') });
 });
 
 
-router.post('/signup', passport.authenticate('local-signup', {
-    successRedirect: 'http://localhost:4200/login',
-    failureRedirect: 'http://localhost:4200/signup',
-    failureFlash: true
-}));
+router.post('/signup', passport.authenticate('local-signup'), (req, res) => {
+    res.json({message:"user created"});
+       
+});
 // auth logout
 router.get('/logout', (req, res) => {
     req.logout();
