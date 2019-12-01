@@ -249,8 +249,7 @@ async function sendMail(invoice, callback) {
                                 INVOICE TO:<br>
                                 <strong>${invoice.info.name}</strong><br>
                                 Address: ${invoice.info.address}<br>
-                                 Phone number: ${invoice.info.phoneNumber}
-                                <br>
+                                 Phone number: ${invoice.info.phoneNumber}<br>
                                  Email: ${invoice.info.emailAddress}
                             </td>
         

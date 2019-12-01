@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductService } from './service/product.service';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { CheckoutcompleteComponent } from './checkoutcomplete/checkoutcomplete.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { CheckoutcompleteComponent } from './checkoutcomplete/checkoutcomplete.c
     routingComponents,
     CheckoutComponent,
     CheckoutcompleteComponent,
+    FooterComponent,
     
     
     ],
