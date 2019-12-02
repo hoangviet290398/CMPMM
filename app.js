@@ -31,7 +31,7 @@ app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, content-type, Accept');
-    
+
     next();
 })
 
@@ -61,7 +61,7 @@ app.use('/profile', profileRoutes);
 app.use('/category', categoryRoutes);
 app.use('/product', productRoutes);
 app.use('/user', userRoutes);
-app.use('/cart',cartRoutes);
+app.use('/cart', cartRoutes);
 
 
 // create home route
@@ -107,24 +107,7 @@ async function sendMail(invoice, callback) {
         from: 'meansportstore@gmail.com',
         to: invoice.info.emailAddress,
         subject: 'Receipt for Your Payment to SPORTSTORE',
-        // html: `<html>
-        //         <body>
-        //         <h1><strong>Hello ${invoice.info.name}</strong></h1>
-        //         <h3>This is the invoice for the order that you have placed in SPORTSTORE</h4>
-        //         <h5>The shipping will take some days before your goods arrive to your sweet home</h5>
-        //         <h6>Here is your order detail information:</h6>
-        //         <table rules="all" style="border-color: #666;" cellpadding="10">
-        //         <tr style='background: #eee;'>
-        //             <td><strong>Product name</strong> </td>
-        //             <td><strong>Quantity</strong></td>
-        //             ${purchasedProductsString}
-        //         </tr>
-        //         </table>
-        //         <h6>Sub total: ${invoice.subTotal}</h6>
-        //         <h6>Tax: ${invoice.tax}</h6>
-        //         <h6>Total: ${invoice.total}</h6>
-        //         </body>
-        //         </html>`
+
         html: `<!doctype html>
         <html>
         
