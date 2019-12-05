@@ -28,9 +28,9 @@
         <ul class="navbar-nav flex-row ml-md-auto">
             <div *ngIf="!loggedIn">
                 <ul class="navbar-nav flex-row ml-md-auto">
-                    <li class="nav-item" >
+                    <li class="nav-item">
                         <a routerLink="login" class="nav-link" href="/login">LOGIN</a>
-                        
+
                     </li>
                     <li class="nav-item">
                         <a routerLink="signup" class="nav-link" href="/signup">SIGN UP</a>
@@ -38,27 +38,27 @@
                 </ul>
             </div>
             <div *ngIf="loggedIn && user">
-                
+
                 <ul class="navbar-nav flex-row ml-md-auto">
-                <li class="nav-item" >
-                    <p id="name">Welcome {{ user.name }}</p>
-                </li>
-                <li class="nav-item" >
-                    <img class="dot" src="{{ user.photoUrl }}">
-                </li>
-                <li class="nav-item" >
-                    <a (click)="signOut()" class="nav-link" id="signOut">SIGN OUT</a>
-                </li>
-            </ul>
-           
+                    <li class="nav-item">
+                        <p id="name">Welcome {{ user.name }}</p>
+                    </li>
+                    <li class="nav-item">
+                        <img class="dot" src="{{ user.photoUrl }}">
+                    </li>
+                    <li class="nav-item">
+                        <a (click)="signOut()" class="nav-link" id="signOut">SIGN OUT</a>
+                    </li>
+                </ul>
+
             </div>
-           
-                 
-           
+
+
+
             <li class="nav-item">
                 <a [routerLink]="['/cart']" class="nav-link" href="/cart"><i class="fa fa-shopping-cart"></i> CART</a>
             </li>
-         
+
         </ul>
     </div>
 </nav>

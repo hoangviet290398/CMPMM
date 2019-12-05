@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Item } from '../entities/item.entity';
 import { ProductService } from '../service/product.service';
 import {Router} from '@angular/router'
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
 	selector: 'app-cart',
@@ -20,6 +21,7 @@ export class CartComponent implements OnInit {
 	private changedQuantityID:any;
 	private isQuantityChanged=false;
 	private id:string;
+	private signInId:any;
 	constructor(
 		private activatedRoute: ActivatedRoute,
 		private productService: ProductService,
@@ -31,10 +33,15 @@ export class CartComponent implements OnInit {
 	ngOnInit() {
 		//this.productService.readProducts();
 		//this.startProductServices();
-
 		this.isQuantityChanged=false;
 		this.id = this.productService.productId;
-			console.log('this is id: ',this.id);
+		if(this.productService.signInId!='')
+		{
+			this.signInId=this.productService.signInId;
+		}
+		console.log('you login id: ',this.signInId);
+
+		console.log('this is id: ',this.id);
 			if (this.id) {
 				var item: Item = {
 					product: this.productService.find(this.id),
