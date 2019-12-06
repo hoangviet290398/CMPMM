@@ -23,19 +23,20 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
 
     this.logIn();
-
   }
 
   logIn() {
-
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.loggedIn = (user != null);
-      console.log('log state', this.loggedIn);
+      console.log('log state', this.user);
       if (this.loggedIn) {
         this.productService.signInId=this.user.id;
+        this.productService.userEmail=this.user.email;
+        this.productService.userName=this.user.name;
         console.log('current id:',this.productService.signInId);
-        
+        console.log('current email:',this.productService.userEmail);
+
         if(JSON.parse(localStorage.getItem('signInId'))==null)
         {
           let signInId:any=[];
@@ -59,6 +60,7 @@ export class HeaderComponent implements OnInit {
           if(!this.isIdExisted)
           {
             signInId.push(this.user.id)
+
               localStorage.setItem('signInId',JSON.stringify(signInId));
               console.log('added id', signInId)
           }

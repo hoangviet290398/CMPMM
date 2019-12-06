@@ -49,7 +49,15 @@ export class CheckoutComponent implements OnInit {
       this.tax = this.subTotal * 10 / 100;
       this.total = this.subTotal + this.tax;
     }
-
+    if(this.productService.userEmail)
+    {
+      this.InfoForm.setValue({
+        name:this.productService.userName,
+        address:'',
+        phoneNumber:'',
+        emailAddress:this.productService.userEmail
+      });
+    }
   }
   //
   infoForm() {

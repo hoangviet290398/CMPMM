@@ -11,7 +11,10 @@ export class ProductService  {
     //
     productId;// use for cart
     //
+    userName:any;
+    //
     signInId:any;
+    userEmail:any;
    products: any=[];
 
     constructor(private apiService: ApiService,private http: HttpClient)
